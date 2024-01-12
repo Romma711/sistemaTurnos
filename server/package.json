@@ -1,15 +1,15 @@
 {
-  "name": "sistematurnos",
-  "version": "1.0.0",
-  "description": "Sistema de gestión para el manejo de turnos del rubro solicitado por el cliente.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2"
-  }
+    "name": "sistematurnos",
+    "version": "1.0.0",
+    "description": "Sistema de gestión para el manejo de turnos del rubro solicitado por el cliente.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2"
+    }
 }
