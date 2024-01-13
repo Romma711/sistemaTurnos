@@ -1,1 +1,1 @@
-module.exports = { Shift };
+//module.exports = { Shift };
