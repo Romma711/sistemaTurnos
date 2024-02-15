@@ -23,7 +23,7 @@ const turnos = [{
 //* Crear turno *//
 
 const createView = function(req, res) {
-
+    res.send()
 }
 
 const create = function(req, res) {
@@ -34,11 +34,11 @@ const create = function(req, res) {
             time: body.time,
             reservedBy: body.reservedBy
         })
-        .then((createdTask) => {
+        .then((createdShift) => {
             res.status(201).json({
                 ok: true,
                 message: "Tarea creada con éxito",
-                data: createdTask,
+                data: createdShift,
             })
         })
         .catch((err) => {
@@ -48,7 +48,7 @@ const create = function(req, res) {
 
 //* Obtener todos los turnos *//
 const getAll = function(req, res) {
-
+   res.send(turnos);
 }
 
 //* Eliminar turno *//
