@@ -1,9 +1,6 @@
 const express = require('express');
-const { create, getAll, remove, createView } = require('../controllers/shiftController');
+const { create, getAll, remove } = require('../controllers/shiftController');
 const router = express.Router();
-
-//* Crear ruta *//
-router.get("/create", createView)
 
 //* Crear ruta *//
 router.post("/", create)
