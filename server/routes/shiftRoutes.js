@@ -9,9 +9,9 @@ router.get("/create", createView)
 router.post("/", create)
 
 //* Obtener todos los rutas *//
-router.get("/", getAll)
+router.get("/all", getAll)
 
 //* Eliminar rutas *//
 router.delete("/:id", remove);
-
+ 
 module.exports = router;

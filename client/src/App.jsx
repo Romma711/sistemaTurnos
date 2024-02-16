@@ -1,28 +1,18 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { SideBar } from './components/SideBar'
-import { Index } from './pages/Index'
-import { Turnos } from './pages/Turnos'
-import { Listado } from './pages/Listado'
-import { Config } from './pages/Config'
-function App() {
+import { useEffect } from "react";
 
+function App() {
+  useEffect(
+    fetch('http://localhost:5000/api/shifts/all')
+    .then(res => res.json())
+    .then(res => console.log(res))
+    .catch( err => console.error(err)), 
+    [])
 
   return (
     <>
-        
-        
-        <BrowserRouter>
-        <SideBar user=""/>
-            <Routes>
-                <Route path="/" element={<Index/>}/>
-                <Route path="/turnos" element={<Turnos/>}/>
-                <Route path="/listado-turnos" element={<Listado/>}/>
-                <Route path="/config" element={<Config/>}/>
-            </Routes>
-        </BrowserRouter>
-    
-        </>
-  )
+      
+    </>
+  );
 }
 
-export default App
+export default App;

@@ -48,7 +48,7 @@ const create = function(req, res) {
 
 //* Obtener todos los turnos *//
 const getAll = function(req, res) {
-   res.send(turnos);
+    res.send(turnos);
 }
 
 //* Eliminar turno *//
