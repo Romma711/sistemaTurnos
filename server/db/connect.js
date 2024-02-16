@@ -15,5 +15,9 @@ const dbConnect = () => {
     });
 }
 
+const connection = () => db
 
-module.exports = dbConnect;
+module.exports = {
+    dbConnect,
+    connection
+};
