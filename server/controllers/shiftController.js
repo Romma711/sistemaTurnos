@@ -1,4 +1,4 @@
-const { Shift } = require('../models/shift');
+const db = require('./db/connect.js');
 
 const turnos = [{
         title: "Uñas",
@@ -22,28 +22,25 @@ const turnos = [{
 
 //* Crear turno *//
 
-const createView = function(req, res) {
-    res.send()
-}
+
 
 const create = function(req, res) {
-    const body = req.body
-    Shift.create({
-            title: body.title,
-            date: body.date,
-            time: body.time,
-            reservedBy: body.reservedBy
-        })
-        .then((createdShift) => {
-            res.status(201).json({
-                ok: true,
-                message: "Tarea creada con éxito",
-                data: createdShift,
+
+    if(req.body && req.body.length > 0)
+    {
+        const connection = db.getConnection()
+        connection.query("INSERT INTO SHIFTS (title, date, time, reservedBy) VALUES ("+req.body.title +","+ req.body.date+","+req.body.time+","+req.body.reservedBy+")")
+            .then((createdShift) => {
+                res.status(201).json({
+                    ok: true,
+                    message: "Tarea creada con éxito",
+                    data: createdShift,
+                })
             })
-        })
-        .catch((err) => {
-            res.status(400).json({ ok: false, message: "Error al crear la tarea" })
-        })
+            .catch((err) => {
+                res.status(400).json({ ok: false, message: "Error al crear la tarea" })
+            })
+    }
 }
 
 //* Obtener todos los turnos *//
@@ -56,4 +53,4 @@ const remove = function(req, res) {
 
 }
 
-module.exports = { create, getAll, remove, createView };
+module.exports = { create, getAll, remove };
