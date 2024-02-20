@@ -1,4 +1,4 @@
-const db = require('./db/connect.js');
+const db = require('../db/connect');
 
 const turnos = [{
         title: "Uñas",
@@ -29,7 +29,7 @@ const create = function(req, res) {
     if(req.body && req.body.length > 0)
     {
         const connection = db.getConnection()
-        connection.query("INSERT INTO SHIFTS (title, date, time, reservedBy) VALUES ("+req.body.title +","+ req.body.date+","+req.body.time+","+req.body.reservedBy+")")
+        connection.query("INSERT INTO turnos (hora, descripcion, dia) VALUES ("+req.body.hora +","+ req.body.descripcion+","+req.body.dia+")")
             .then((createdShift) => {
                 res.status(201).json({
                     ok: true,
@@ -46,6 +46,7 @@ const create = function(req, res) {
 //* Obtener todos los turnos *//
 const getAll = function(req, res) {
     res.send(turnos);
+    
 }
 
 //* Eliminar turno *//

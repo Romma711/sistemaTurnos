@@ -1,16 +1,20 @@
-import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { Index } from "./pages/Index";
+import { Login } from "./pages/Login";
+import { Config } from "./pages/Config";
+import { NavBar } from "./components/NavBar";
 
 function App() {
-  useEffect(
-    fetch('http://localhost:5000/api/shifts/all')
-    .then(res => res.json())
-    .then(res => console.log(res))
-    .catch( err => console.error(err)), 
-    [])
+ 
 
   return (
     <>
-      
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Index />}/>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/config" element={<Config />}/>
+      </Routes>
     </>
   );
 }
