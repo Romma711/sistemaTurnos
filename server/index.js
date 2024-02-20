@@ -6,6 +6,9 @@ const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 5000;
 const cors = require('cors')
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }))
+
 
 //? Archivos estáticos como el index.html y demás:
 app.use(express.static(path.join(__dirname, '../client/public')));
@@ -24,6 +27,10 @@ app.use("/api/shifts", shiftRoutes);
 
 //! Desarrollo !//
 //!==============================================================!//
+
+app.get('/form', (req, res) => {
+    res.sendFile(__dirname + '/form.html');
+});
 
 //? Escuchamos al servidor ?//
 //?==============================================================?//

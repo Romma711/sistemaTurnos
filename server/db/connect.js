@@ -2,8 +2,9 @@ const mysql = require('mysql2');
 
 const db = mysql.createConnection({
     user: 'root',
+    password: null,
     host: process.env.MYSQL_HOST,
-    database: process.env.MYSQL_DBNAME
+    database: "sistema_turnos"
 })
 
 

@@ -26,21 +26,14 @@ const turnos = [{
 
 const create = function(req, res) {
 
-    if(req.body && req.body.length > 0)
+    if(req.body)
     {
-        const connection = db.getConnection()
-        connection.query("INSERT INTO turnos (hora, descripcion, dia) VALUES ("+req.body.hora +","+ req.body.descripcion+","+req.body.dia+")")
-            .then((createdShift) => {
-                res.status(201).json({
-                    ok: true,
-                    message: "Tarea creada con éxito",
-                    data: createdShift,
-                })
-            })
-            .catch((err) => {
-                res.status(400).json({ ok: false, message: "Error al crear la tarea" })
-            })
+        const connection = db.connection();
+        connection.query( `INSERT INTO shifts (title, date, time)
+        VALUES (?, ?, ?);`,
+        [req.body.title, req.body.date, req.body.time])
     }
+    res.send("/")
 }
 
 //* Obtener todos los turnos *//
