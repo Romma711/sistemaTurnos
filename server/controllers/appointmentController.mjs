@@ -3,6 +3,7 @@ import { connection } from '../db/connect.mjs';
 //* Crear turno *//
 
 export const create = async function(req, res) {
+    console.log(req.body)
     try{
         if(req.body)
         {
@@ -18,8 +19,19 @@ export const create = async function(req, res) {
 }
 
 //* Obtener todos los turnos *//
-export const getAll = function(req, res) {
-    res.send(turnos);
+export const getAll = async function(req, res) {
+    try{
+        if(req.body)
+        {
+            const [appointments] = await connection.query(
+                'SELECT id, title, date, time FROM appointment'
+              )
+              console.log(appointments)
+              res.send(appointments)
+        }
+    }catch(err){
+        console.error(err)
+    }
 }
 
 //* Eliminar turno *//

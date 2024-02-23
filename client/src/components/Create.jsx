@@ -2,22 +2,22 @@ import { useState } from "react";
 
 export function Create() {
   const [data, setData] = useState({
-    descripcion: "",
-    dia: "",
-    hora: "",
+    title: "",
+    date: "",
+    time: "",
   });
 
   const handleSubmit = async (evt) => {
+    fetch("http://localhost:5000/api/appointment", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(data),
+    }).then((res) => console.log(res));
+    console.log(data);
     evt.preventDefault();
-    fetch('http://localhost:5000/api/shifts/create', {
-        method:'POST',
-        body: JSON.stringify(data),
-        headers:{
-            "content-type" : "application/json",
-        }
-    })
-    .then(res => res.json())
-  }
+  };
 
   function handleChange(evt) {
     const { target } = evt;
@@ -28,7 +28,7 @@ export function Create() {
       [name]: value,
     };
 
-    setData(newData)
+    setData(newData);
   }
 
   return (
@@ -36,21 +36,22 @@ export function Create() {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="descripcion"
-          value={data.descripcion}
+          name="title"
+          value={data.title}
           onChange={handleChange}
           placeholder="Descripcion"
         />
-        <input 
-          type="date" 
-          name="dia" 
-          value={data.dia}
+        <input
+          type="date"
+          name="date"
+          value={data.date}
           onChange={handleChange}
-          placeholder="Dia" />
+          placeholder="Dia"
+        />
         <input
           type="time"
-          name="hora"
-          value={data.hora}
+          name="time"
+          value={data.time}
           onChange={handleChange}
           placeholder="Horario"
         />
