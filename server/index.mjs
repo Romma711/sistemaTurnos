@@ -1,28 +1,35 @@
 //! Principal para funcionamiento !//
 //!==============================================================!//
 
-const express = require('express');
+
+//? Cosas basicas para funcionamiento:
+import express from 'express'
+import * as path from 'path';
+import cors from 'cors';
+import pkg from 'body-parser';
+const { urlencoded } = pkg;
+
+//? Inicializacion de cosas:
 const app = express();
-const path = require('path');
 const PORT = process.env.PORT || 5000;
-const cors = require('cors')
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(urlencoded({ extended: true }))
 
-
-//? Archivos estáticos como el index.html y demás:
-app.use(express.static(path.join(__dirname, '../client/public')));
+//? Configuración de dirname:
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 //! Base de Datos !//
 //!==============================================================!//
-const db = require('./db/connect.js');
+import { connection } from './db/connect.mjs';
 
 //! Routers !//
 //!==============================================================!//
 //? Turnos ?//:
-const shiftRoutes = require('./routes/shiftRoutes');
+import { appointmentRouter } from './routes/appointmentRoutes.mjs';
 app.use(cors())
-app.use("/api/shifts", shiftRoutes);
+app.use("/api/appointment", appointmentRouter);
 
 
 //! Desarrollo !//
@@ -35,6 +42,6 @@ app.get('/form', (req, res) => {
 //? Escuchamos al servidor ?//
 //?==============================================================?//
 app.listen(PORT, () => {
-    db.dbConnect();
+    connection
     console.log(`El servidor esta escuchando en el puerto ${PORT}`);
 });
