@@ -25,21 +25,26 @@ const turnos = [{
 
 
 const create = function(req, res) {
-
-    if(req.body)
-    {
-        const connection = db.connection();
-        connection.query( `INSERT INTO shifts (title, date, time)
-        VALUES (?, ?, ?);`,
-        [req.body.title, req.body.date, req.body.time])
+    console.log(req)
+    const connection = db.connection();
+    try {
+        if(req.body)
+        {
+            connection.query(`INSERT INTO turnos (descripcion, dia, hora)
+            VALUES (?, ?, ?);`,
+            [req.body.descripcion, req.body.dia, req.body.hora])
+        }
+    } finally {
+        connection.destroy();
     }
-    res.send("/")
 }
 
 //* Obtener todos los turnos *//
 const getAll = function(req, res) {
     res.send(turnos);
-    
+    const connection = db.connection();
+    const [turnos] = connection.query(`SELECT idturno, dia, hora, descripcion FROM turnos`)
+    return turnos
 }
 
 //* Eliminar turno *//

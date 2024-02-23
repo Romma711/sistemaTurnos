@@ -4,7 +4,7 @@ const db = mysql.createConnection({
     user: 'root',
     password: null,
     host: process.env.MYSQL_HOST,
-    database: "sistema_turnos"
+    database: "sistema-turnos"
 })
 
 

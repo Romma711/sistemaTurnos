@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 //* Crear ruta *//
-router.post("/", create)
+router.post("/create", create)
 
 //* Obtener todos los rutas *//
 router.get("/all", getAll)

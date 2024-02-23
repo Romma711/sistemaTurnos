@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { SideBar } from "../components/SideBar";
 import { Shift } from "../components/Shift";
+import { Create } from "../components/Create";
 
 export function Index() {
   const [data, setData] = useState([]);
@@ -15,6 +16,7 @@ export function Index() {
   return (
     <>
       <SideBar />
+      <Create />
       {data.map((shift) => (
             <Shift 
             key={shift.id}

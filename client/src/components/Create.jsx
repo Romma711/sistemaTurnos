@@ -1,39 +1,61 @@
-import { useEffect } from "react"
+import { useState } from "react";
 
-export function Create(){
+export function Create() {
+  const [data, setData] = useState({
+    descripcion: "",
+    dia: "",
+    hora: "",
+  });
 
-    const [data, setData] = useState({
-        description: '',
-        day: '',
-        time: ''
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    fetch('http://localhost:5000/api/shifts/create', {
+        method:'POST',
+        body: JSON.stringify(data),
+        headers:{
+            "content-type" : "application/json",
+        }
     })
+    .then(res => res.json())
+  }
 
-    const handleInputChange = (event) =>{
-        setData({
-            ...data,
-            [event.target]
-        })
-    }
+  function handleChange(evt) {
+    const { target } = evt;
+    const { name, value } = target;
 
-    useEffect(() => {
-        fetch('/api/shifts/',{
-            method: "POST",
-            headers:{
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({})
+    const newData = {
+      ...data,
+      [name]: value,
+    };
 
-        })
-        
-    })
+    setData(newData)
+  }
 
-    return(
-        <>
-            <form id="create-shifts" name="crate-shifts" action="">
-                <input type="text" placeholder="Descripsion" />
-                <input type="date" placeholder="Dia"/>
-                <input type="time" placeholder="Horario"/>
-            </form>
-        </>
-    )
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="descripcion"
+          value={data.descripcion}
+          onChange={handleChange}
+          placeholder="Descripcion"
+        />
+        <input 
+          type="date" 
+          name="dia" 
+          value={data.dia}
+          onChange={handleChange}
+          placeholder="Dia" />
+        <input
+          type="time"
+          name="hora"
+          value={data.hora}
+          onChange={handleChange}
+          placeholder="Horario"
+        />
+        <button type="submit">crear</button>
+      </form>
+    </>
+  );
 }
