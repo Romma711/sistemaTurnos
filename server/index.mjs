@@ -25,11 +25,15 @@ const __dirname = dirname(__filename);
 import { connection } from './db/connect.mjs';
 
 //! Routers !//
+app.use(cors());
 //!==============================================================!//
 //? Turnos ?//:
 import { appointmentRouter } from './routes/appointmentRoutes.mjs';
-app.use(cors())
 app.use("/api/appointment", appointmentRouter);
+
+//? Usuarios ?//:
+import { userRouter } from './routes/userRoutes.mjs';
+app.use("/api/user", userRouter);
 
 
 //! Desarrollo !//
