@@ -6,10 +6,12 @@ export const create = async function(req, res) {
     try{
         if(req.body)
         {
-            await connection.query(`INSERT INTO user (name, lastname, email, password, isAdmin)
-            VALUES (?, ?, ?, ?, ?, 0);`,
-            [req.body.name, req.body.lastname, req.body.email, re.body.password])
-            res.send("/")
+            await connection.query(`INSERT INTO user (name, lastname, email, phoneNumber, password, isAdmin)
+            VALUES (?, ?, ?, ?, ?, ?);`,
+            [req.body.name, req.body.lastname, req.body.email, req.body.phoneNumber,req.body.password, 0])
+            //res.send("/")
+            const vvv = getByEmail(req.body.email);
+                console.log("puta"+vvv);
         }
     }catch(err){
         console.error(err)
@@ -50,11 +52,11 @@ export const getByID = async function(req, res) {
 }
 
 //* Obtener usuario por email *//
-export const getByEmail = async function(req, res) {
+export const getByEmail = function(req, res) {
     try{
         if(req.body)
         {
-            const [user] = await connection.query(
+            const [user] = connection.query(
                 `SELECT * FROM user WHERE email =
                 (?);`
                 [req.body.email]
