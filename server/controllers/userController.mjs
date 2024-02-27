@@ -1,14 +1,14 @@
 import { connection } from '../db/connect.mjs';
 
-//* Crear turno *//
+//* Crear usuario *//
 
 export const create = async function(req, res) {
     try{
         if(req.body)
         {
-            await connection.query(`INSERT INTO appointment (title, date, time)
-            VALUES (?, ?, ?);`,
-            [req.body.title, req.body.date, req.body.time])
+            await connection.query(`INSERT INTO user (name, lastname, email, password, isAdmin)
+            VALUES (?, ?, ?, ?, ?, 0);`,
+            [req.body.name, req.body.lastname, req.body.email, re.body.password])
             res.send("/")
         }
     }catch(err){
@@ -17,27 +17,27 @@ export const create = async function(req, res) {
    
 }
 
-//* Obtener todos los turnos *//
+//* Obtener todos los usuarios *//
 export const getAll = async function(req, res) {
     try{
         if(req.body)
         {
-            const [appointments] = await connection.query(
-                'SELECT id, title, date, time FROM appointment'
+            const [user] = await connection.query(
+                'SELECT * FROM user'
               )
-              res.send(appointments)
+              res.send(user)
         }
     }catch(err){
         console.error(err)
     }
 }
 
-//* Eliminar turno *//
+//* Eliminar usuario *//
 export const remove = async function(req, res) {
     try{
         if(req.body)
         {
-            await connection.query(`DELETE FROM appointment WHERE id =
+            await connection.query(`DELETE FROM user WHERE id =
             (?);`,
             [req.body.id])
             res.send("/")
