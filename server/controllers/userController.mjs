@@ -3,18 +3,23 @@ import { connection } from '../db/connect.mjs';
 //* Crear usuario *//
 
 export const create = async function(req, res) {
-    try{
+    try
+    {
         if(req.body)
         {
             await connection.query(`INSERT INTO user (name, lastname, email, phoneNumber, password, isAdmin)
             VALUES (?, ?, ?, ?, ?, ?);`,
             [req.body.name, req.body.lastname, req.body.email, req.body.phoneNumber,req.body.password, 0])
-            //res.send("/")
-            const vvv = getByEmail(req.body.email);
-                console.log("puta"+vvv);
         }
     }catch(err){
-        console.error(err)
+        if(err.sqlState == 23000)
+        {
+            return res.status(422).json({ message: "Mail en uso. Prueba con otro" })
+        }
+        else
+        {
+            console.log("sex")
+        }
     }
    //julian es un mogolico
 }
@@ -52,17 +57,14 @@ export const getByID = async function(req, res) {
 }
 
 //* Obtener usuario por email *//
-export const getByEmail = function(req, res) {
+export const getByEmail = async function(req, res) {
     try{
-        if(req.body)
-        {
-            const [user] = connection.query(
-                `SELECT * FROM user WHERE email =
-                (?);`
-                [req.body.email]
-              )
-              res.send(user)
-        }
+        const [user] = await connection.query(
+            `SELECT * FROM user WHERE email =
+            (?);`
+            [req.body]
+            )
+            return user[0];
     }catch(err){
         console.error(err)
     }
