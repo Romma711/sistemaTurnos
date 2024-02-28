@@ -1,88 +1,20 @@
-import { connection } from '../db/connect.mjs';
+import { userModel } from '../models/user.mjs'
 
-//* Crear usuario *//
-
-export const create = async function(req, res) {
-    try
-    {
-        if(req.body)
-        {
-            await connection.query(`INSERT INTO user (name, lastname, email, phoneNumber, password, isAdmin)
-            VALUES (?, ?, ?, ?, ?, ?);`,
-            [req.body.name, req.body.lastname, req.body.email, req.body.phoneNumber,req.body.password, 0])
-        }
-    }catch(err){
-        if(err.sqlState == 23000)
-        {
-            return res.status(422).json({ message: "Mail en uso. Prueba con otro" })
-        }
-        else
-        {
-            console.log("sex")
-        }
+export class UserController {
+    static async getAll (req, res) {
+      const users = await userModel.getAll()
+      res.json(users)
     }
-   //julian es un mogolico
-}
-
-//* Obtener todos los usuarios *//
-export const getAll = async function(req, res) {
-    try{
-        if(req.body)
-        {
-            const [user] = await connection.query(
-                'SELECT * FROM user'
-              )
-              res.send(user)
-        }
-    }catch(err){
-        console.error(err)
+  
+    static async getById (req, res) {
+      const { id } = req.params
+      const user = await userModel.getById({ id })
+      if (user) return res.json(user)
+      res.status(404).json({ message: 'User not found' })
     }
+
+    static async create (req, res) {
+        const newUser = await userModel.create({ input: req.body })
+        res.status(201).json(newUser)
+      }
 }
-
-//* Obtener usuario por id *//
-export const getByID = async function(req, res) {
-    try{
-        if(req.body)
-        {
-            const [user] = await connection.query(
-                `SELECT * FROM user WHERE id =
-                (?);`
-                [req.body.id]
-              )
-              res.send(user)
-        }
-    }catch(err){
-        console.error(err)
-    }
-}
-
-//* Obtener usuario por email *//
-export const getByEmail = async function(req, res) {
-    try{
-        const [user] = await connection.query(
-            `SELECT * FROM user WHERE email =
-            (?);`
-            [req.body]
-            )
-            return user[0];
-    }catch(err){
-        console.error(err)
-    }
-}
-
-
-//* Eliminar usuario *//
-export const remove = async function(req, res) {
-    try{
-        if(req.body)
-        {
-            await connection.query(`DELETE FROM user WHERE id =
-            (?);`,
-            [req.body.id])
-            res.send("/")
-        }
-    }catch(err){
-        console.error(err)
-    }
-}
-

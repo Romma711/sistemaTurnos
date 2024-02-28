@@ -1,17 +1,13 @@
 import express from 'express'
-import { create, getAll, getByEmail, remove } from '../controllers/userController.mjs';
+import { UserController } from '../controllers/userController.mjs';
 export const userRouter = express.Router();
 
 
 //* Crear ruta *//
-userRouter.post("/", create)
+userRouter.post("/", UserController.create)
 
 //* Obtener todos los rutas *//
-userRouter.get("/", getAll)
+userRouter.get("/", UserController.getAll)
 
-//* Obtener por email*//
-userRouter.get("/:email", getByEmail)
 
-//* Eliminar rutas *//
-userRouter.delete("/:id", remove);
  

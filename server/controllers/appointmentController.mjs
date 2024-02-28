@@ -1,49 +1,26 @@
-import { connection } from '../db/connect.mjs';
+import { appointmentModel } from '../models/appointment.mjs'
 
-//* Crear turno *//
-
-export const create = async function(req, res) {
-    try{
-        if(req.body)
-        {
-            await connection.query(`INSERT INTO appointment (title, date, time)
-            VALUES (?, ?, ?);`,
-            [req.body.title, req.body.date, req.body.time])
-            res.send("/")
-        }
-    }catch(err){
-        console.error(err)
+export class AppointmentController {
+    static async getAll (req, res) {
+      const appointments = await appointmentModel.getAll()
+      res.json(appointments)
     }
-   
-}
+  
+    static async getById (req, res) {
+      const { id } = req.params
+      const user = await appointmentModel.getById({ id })
+      if (user) return res.json(user)
+      res.status(404).json({ message: 'Appointment not found' })
+    }
 
-//* Obtener todos los turnos *//
-export const getAll = async function(req, res) {
-    try{
-        if(req.body)
-        {
-            const [appointments] = await connection.query(
-                'SELECT id, title, date, time FROM appointment'
-              )
-              res.send(appointments)
-        }
-    }catch(err){
-        console.error(err)
+    static async create (req, res) {
+        const newAppointments = await appointmentModel.create({ input: req.body })
+        res.status(201).json(newAppointments)
+    }
+
+    static async remove (req, res) {
+        const { id } = req.params
+        const queryResult = await appointmentModel.remove({ id })
+        res.status(201).json(queryResult)
     }
 }
-
-//* Eliminar turno *//
-export const remove = async function(req, res) {
-    try{
-        if(req.body)
-        {
-            await connection.query(`DELETE FROM appointment WHERE id =
-            (?);`,
-            [req.body.id])
-            res.send("/")
-        }
-    }catch(err){
-        console.error(err)
-    }
-}
-

@@ -35,6 +35,9 @@ app.use("/api/appointment", appointmentRouter);
 import { userRouter } from './routes/userRoutes.mjs';
 app.use("/api/user", userRouter);
 
+//? Usuarios ?//:
+import { reservationRouter } from './routes/reservationRoutes.mjs';
+app.use("/api/reservation", reservationRouter);
 
 //! Desarrollo !//
 //!==============================================================!//
