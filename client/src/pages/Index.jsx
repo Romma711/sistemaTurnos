@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { SideBar } from "../components/SideBar";
-import { Appointment } from "../components/Appointment";
 import { Create } from "../components/Create";
+import { AppointmentList } from "../components/AppointmentList";
+
+//#3e0daf paleta de colores
 
 export function Index() {
   const [data, setData] = useState([]);
@@ -15,10 +16,8 @@ export function Index() {
 
   return (
     <>
-      <SideBar />
       <Create />
-      {console.log(data)}
-      <Appointment appointment={data}/>
+      <AppointmentList/>
     </>
   );
 }
