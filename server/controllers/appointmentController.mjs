@@ -8,8 +8,8 @@ export class AppointmentController {
   
     static async getById (req, res) {
       const { id } = req.params
-      const user = await appointmentModel.getById({ id })
-      if (user) return res.json(user)
+      const appointment = await appointmentModel.getById({ id })
+      if (appointment) return res.json(appointment)
       res.status(404).json({ message: 'Appointment not found' })
     }
 

@@ -1,14 +1,13 @@
 import express from 'express'
-import { create, getAll, remove } from '../controllers/reservationController.mjs';
+import { ResevationController } from '../controllers/reservationController.mjs';
 export const reservationRouter = express.Router();
 
 
 //* Crear ruta *//
-reservationRouter.post("/", create)
+reservationRouter.post("/", ResevationController.create)
 
 //* Obtener todos los rutas *//
-reservationRouter.get("/", getAll)
+reservationRouter.get("/", ResevationController.getAll)
 
-//* Eliminar rutas *//
-reservationRouter.delete("/:id", remove);
+
  

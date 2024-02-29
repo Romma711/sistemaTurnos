@@ -1,49 +1,20 @@
-import { connection } from '../db/connect.mjs';
+import { reservationModel } from '../models/reservation.mjs'
 
-//* Crear reserva *//
-
-export const create = async function(req, res) {
-    try{
-        if(req.body)
-        {
-            await connection.query(`INSERT INTO reservation (idAppointment, idUser)
-            VALUES (?, ?);`,
-            [req.body.idAppointment, req.body.idUser])
-            res.send("/")
-        }
-    }catch(err){
-        console.error(err)
+export class ResevationController {
+    static async getAll (req, res) {
+      const reservations = await reservationModel.getAll()
+      res.json(reservations)
     }
-   
-}
-
-//* Obtener todas las reservas *//
-export const getAll = async function(req, res) {
-    try{
-        if(req.body)
-        {
-            const [reservations] = await connection.query(
-                'SELECT id, idAppointment, idUser FROM reservation'
-              )
-              res.send(reservations)
-        }
-    }catch(err){
-        console.error(err)
+  
+    static async getById (req, res) {
+      const { id } = req.params
+      const reservation = await reservationModel.getById({ id })
+      if (reservation) return res.json(reservation)
+      res.status(404).json({ message: 'reservation not found' })
     }
-}
 
-//* Eliminar reserva *//
-export const remove = async function(req, res) {
-    try{
-        if(req.body)
-        {
-            await connection.query(`DELETE FROM reservation WHERE id =
-            (?);`,
-            [req.body.id])
-            res.send("/")
-        }
-    }catch(err){
-        console.error(err)
-    }
+    static async create (req, res) {
+        const newReservation = await reservationModel.create({ input: req.body })
+        res.status(201).json(newReservation)
+      }
 }
-
