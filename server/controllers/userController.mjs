@@ -28,6 +28,10 @@ export class UserController {
         const email = req.body.email;
         const password= req.body.password;
         const user = await userModel.verify({ email, password});
+        if(!user){
+          return res.status(404).json({ message: "Email y/o contraseña incorrecta" })
+        }
         res.status(201).json(user);
       }
 }
+

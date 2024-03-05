@@ -83,18 +83,14 @@ export class userModel{
     static async verify({email, password})
     {
         try{
-            const emailExists = await this.getByEmail({ email })
-            if(Object.keys(emailExists).length != 0) { //Verifies email
-                const passwordVerified = await compare(password, emailExists[0].password); //Verifies password
+            const user = await this.getByEmail({ email })
+            if(Object.keys(user).length != 0)  //Verifies email
+            {
+                const passwordVerified = await compare(password, user[0].password); //Verifies password
                 if(passwordVerified == true)
                 { 
-                    console.log("Inicio de sesion exitoso") //Redirect to the app
+                    return user[0];
                 }
-                else{
-                    console.log("Contraseña incorrecta.") //It should return a statusCode for the front-end
-                }
-            }else {
-                console.log("Email inexistente") //The same here
             }
         }catch(err){
             console.error(err);
