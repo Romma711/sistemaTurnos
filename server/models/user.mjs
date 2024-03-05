@@ -1,21 +1,24 @@
 import { connection } from '../db/connect.mjs';
+import { hash, compare } from 'bcrypt';
+const saltRounds = 10;
 
 export class userModel{
 
     //* CREATE USER *//
     static async create ({ input }) {
+        const password = input.password;    
+        const encryptedPassword = await hash(password, saltRounds)
         const {
             name,
             lastname,
             email,
-            password,
             phoneNumber
           } = input
         try
         {
             await connection.query(`INSERT INTO user (name, lastname, email, password, phoneNumber, isAdmin)
                 VALUES (?, ?, ?, ?, ?, ?);`,
-                [name, lastname, email, password, phoneNumber, 0])
+                [name, lastname, email, encryptedPassword, phoneNumber, 0])
         }catch(err){
             if(err.sqlState == 23000)
             {
@@ -82,7 +85,9 @@ export class userModel{
         try{
             const emailExists = await this.getByEmail({ email })
             if(Object.keys(emailExists).length != 0) { //Verifies email
-                if(password == emailExists[0].password){ //Verifies password
+                const passwordVerified = await compare(password, emailExists[0].password); //Verifies password
+                if(passwordVerified == true)
+                { 
                     console.log("Inicio de sesion exitoso") //Redirect to the app
                 }
                 else{
