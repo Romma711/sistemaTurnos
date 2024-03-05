@@ -33,13 +33,14 @@ export function Create() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="w-[500px] h-[400px] m-auto backdrop-brightness-75 border-2 border-[#7347ff]">
         <input
           type="text"
           name="title"
           value={data.title}
           onChange={handleChange}
           placeholder="Descripcion"
+          className="bg-transparent backdrop-brightness-75 border-2 border-[#7347ff]"
         />
         <input
           type="date"
@@ -47,6 +48,7 @@ export function Create() {
           value={data.date}
           onChange={handleChange}
           placeholder="Dia"
+          className="bg-transparent backdrop-brightness-75 border-2 border-[#7347ff]"
         />
         <input
           type="time"
@@ -54,6 +56,7 @@ export function Create() {
           value={data.time}
           onChange={handleChange}
           placeholder="Horario"
+          className="bg-transparent backdrop-brightness-75 border-2 border-[#7347ff]"
         />
         <button type="submit">crear</button>
       </form>

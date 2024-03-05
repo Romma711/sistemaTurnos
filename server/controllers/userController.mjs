@@ -13,6 +13,11 @@ export class UserController {
       res.status(404).json({ message: 'User not found' })
     }
 
+    static async getByEmail(req, res){
+      const { emai } = req.params
+      const user = await userModel.getByEmail({ email })
+    }
+
     static async create (req, res) {
         const newUser = await userModel.create({ input: req.body })
         res.status(201).json(newUser)

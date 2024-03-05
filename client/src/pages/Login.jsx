@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function Login() {
+export function Login({logIn}) {
   const [data, setData] = useState("")
   
 
@@ -27,6 +27,10 @@ export function Login() {
 
     setData(newData);
   }
+  function LogIn(datos){
+
+  }
+  
 
   return (
     <>
@@ -34,7 +38,7 @@ export function Login() {
       <form>
         <input type="text" placeholder="Ingresar email" />
         <input type="text" placeholder="Ingresar pass" />
-        <button type="submit">Ingresar</button>
+        <button onClick={logIn()} type="submit">Ingresar</button>
       </form>
 
       <h2>Registrarse</h2>

@@ -1,24 +1,18 @@
 import { useEffect, useState } from "react";
-import { SideBar } from "../components/SideBar";
-import { Appointment } from "../components/Appointment";
 import { Create } from "../components/Create";
+import { AppointmentList } from "../components/AppointmentList";
 
-export function Index() {
-  const [data, setData] = useState([]);
+//#3e0daf paleta de colores
 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/appointment/')
-      .then(async (res) => await res.json())
-      .then((res) => setData(res))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
-
+export function Index(prop) {
   return (
     <>
-      <SideBar />
+    <div className={`${prop.data ==="create" ? '': 'hidden'}`}>
       <Create />
-      {console.log(data)}
-      <Appointment appointment={data}/>
+    </div>
+    <div className={`${prop.data ==="list" ? '': 'hidden'}`}>
+      <AppointmentList/>
+    </div>
     </>
   );
 }
