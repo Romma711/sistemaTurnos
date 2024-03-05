@@ -1,7 +1,8 @@
 import { connection } from '../db/connect.mjs';
 
 export class userModel{
-    //* Crear usuario *//
+
+    //* CREATE USER *//
     static async create ({ input }) {
         const {
             name,
@@ -23,7 +24,7 @@ export class userModel{
         }
     }
     
-    //* Obtener todos los usuarios *//
+    //* GET ALL THE USERS *//
     static async getAll () {
         try{
             const [users] = await connection.query(
@@ -36,7 +37,7 @@ export class userModel{
         }
     }
     
-    //* Obtener usuario por id *//
+    //* GET USER BY ID *//
     static async getByID ({ id }) {
         try{
             const [user] = await connection.query(
@@ -51,22 +52,20 @@ export class userModel{
         }
     }
     
-    //* Obtener usuario por email *//
+    //* GET USER BY EMAIL *//
     static async getByEmail({ email }) {
         try{
             const [user] = await connection.query(
                 `SELECT * FROM user WHERE email =
-                (?);`
-                [email]
-                )
-                return user[0];
+                (?);`,
+                [email])
+                return user;
         }catch(err){
             console.error(err)
         }
     }
     
-    
-    //* Eliminar usuario *//
+    //* DELETE USER *//
     static async remove({ id }) {
         try{
             await connection.query(`DELETE FROM user WHERE id =
@@ -74,6 +73,26 @@ export class userModel{
             [id])
         }catch(err){
             console.error(err)
+        }
+    }
+
+    //* VERIFY IF USER EXISTS *//
+    static async verify({email, password})
+    {
+        try{
+            const emailExists = await this.getByEmail({ email })
+            if(Object.keys(emailExists).length != 0) { //Verifies email
+                if(password == emailExists[0].password){ //Verifies password
+                    console.log("Inicio de sesion exitoso") //Redirect to the app
+                }
+                else{
+                    console.log("Contraseña incorrecta.") //It should return a statusCode for the front-end
+                }
+            }else {
+                console.log("Email inexistente") //The same here
+            }
+        }catch(err){
+            console.error(err);
         }
     }
     

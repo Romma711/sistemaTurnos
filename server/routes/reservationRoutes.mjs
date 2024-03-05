@@ -2,11 +2,12 @@ import express from 'express'
 import { ResevationController } from '../controllers/reservationController.mjs';
 export const reservationRouter = express.Router();
 
+//!:::::::::::::: RESERVATION ROUTES ::::::::::::::
 
-//* Crear ruta *//
+//* CREATE RESERVATION *//
 reservationRouter.post("/", ResevationController.create)
 
-//* Obtener todos los rutas *//
+//* GET ALL THE RESERVATIONS *//
 reservationRouter.get("/", ResevationController.getAll)
 
 

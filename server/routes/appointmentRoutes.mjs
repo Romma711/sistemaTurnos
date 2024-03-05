@@ -3,12 +3,14 @@ import { AppointmentController } from '../controllers/appointmentController.mjs'
 export const appointmentRouter = express.Router();
 
 
-//* Crear ruta *//
+//!:::::::::::::: APPOINTMENT ROUTES ::::::::::::::
+
+//* CREATE APPOINTMENT *//
 appointmentRouter.post("/", AppointmentController.create)
 
-//* Obtener todos los rutas *//
+//* GET ALL THE APPOINTMENTS *//
 appointmentRouter.get("/", AppointmentController.getAll)
 
-//* Eliminar rutas *//
+//* DELETE APPOINTMENT *//
 appointmentRouter.delete("/:id", AppointmentController.remove);
  

@@ -2,12 +2,18 @@ import express from 'express'
 import { UserController } from '../controllers/userController.mjs';
 export const userRouter = express.Router();
 
+//!:::::::::::::: USER ROUTES ::::::::::::::
 
-//* Crear ruta *//
-userRouter.post("/", UserController.create)
+//* CREATE USER [REGISTER] *//
+userRouter.post("/register", UserController.create)
 
-//* Obtener todos los rutas *//
+//* LOGIN *//
+userRouter.post("/verify", UserController.verify)
+
+//* GET ALL THE USERS *//
 userRouter.get("/", UserController.getAll)
 
+//! GET BY EMAIL [DEVONLY]
+userRouter.post("/:email", UserController.getByEmail);
 
  
