@@ -34,7 +34,7 @@ export function Login() {
     fetch("http://localhost:5000/api/user/verify", {
       method: "post",
       headers:{"Content-Type": "application/x-www-form-urlencoded",},
-      body: new URLSearchParams({email, password})
+      body: new URLSearchParams({email, password}),
     }).then(res => {
       if (!res.ok) throw new Error('response is not ok');
     }).then (res => {
