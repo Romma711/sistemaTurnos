@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Create } from "../components/Create";
 import { AppointmentList } from "../components/AppointmentList";
 
@@ -7,12 +6,12 @@ import { AppointmentList } from "../components/AppointmentList";
 export function Index(prop) {
   return (
     <>
-    <div className={`${prop.data ==="create" ? '': 'hidden'}`}>
-      <Create />
-    </div>
-    <div className={`${prop.data ==="list" ? '': 'hidden'}`}>
-      <AppointmentList/>
-    </div>
+      <div className={`${prop.data ==="create" ? '': 'hidden'}`}>
+        <Create />
+      </div>
+      <div className={`${prop.data ==="list" ? '': 'hidden'}`}>
+        <AppointmentList/>
+      </div>
     </>
   );
 }

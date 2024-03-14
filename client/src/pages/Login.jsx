@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export function Login({logIn}) {
+export function Login() {
   const [data, setData] = useState("")
-  
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const SignIn = async (evt) => {
-    fetch("http://localhost:5000/api/user/", {
+    fetch("http://localhost:5000/api/user/register", {
       method: "post",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -27,18 +28,46 @@ export function Login({logIn}) {
 
     setData(newData);
   }
-  function LogIn(datos){
+  
+ const handleSubmit = (evt) => {
+    evt.preventDefault()
+    fetch("http://localhost:5000/api/user/verify", {
+      method: "post",
+      headers:{"Content-Type": "application/x-www-form-urlencoded",},
+      body: new URLSearchParams({email, password})
+    }).then(res => {
+      if (!res.ok) throw new Error('response is not ok');
+    }).then (res => {
+      sessionStorage.setItem("user" , res)
+      console.log (res)
+    }).catch(err => {
+      sessionStorage.removeItem("user")
+      console.error (err)
+    })
 
   }
-  
 
   return (
     <>
       <h2>Ingresar</h2>
-      <form>
-        <input type="text" placeholder="Ingresar email" />
-        <input type="text" placeholder="Ingresar pass" />
-        <button onClick={logIn()} type="submit">Ingresar</button>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Ingresar email"
+        />
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Ingresar contraseña"
+        />
+        <button type="submit">
+          Ingresar
+        </button>
       </form>
 
       <h2>Registrarse</h2>
@@ -78,7 +107,7 @@ export function Login({logIn}) {
           onChange={handleChange}
           placeholder="Ingresar contraseña"
         />
-        
+
         <button type="submit">Ingresar</button>
       </form>
     </>
