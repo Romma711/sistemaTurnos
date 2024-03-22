@@ -35,11 +35,11 @@ export function Login({user}) {
       method: "post",
       headers:{"Content-Type": "application/x-www-form-urlencoded",},
       body: new URLSearchParams({email, password})
-    }).then (res => 
+    }).then(res => {
       res.json()
-    ).then(res => {
+    }).then (res => {
       user(res)
-      console.log(res)
+      console.log (res)
     }).catch(err => {
       console.error (err)
     })

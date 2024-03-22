@@ -13,7 +13,7 @@ userRouter.post("/verify", UserController.verify)
 //* GET ALL THE USERS *//
 userRouter.get("/", UserController.getAll)
 
-//! GET BY EMAIL [DEVONLY]
+//! GET BY EMAIL [DEV-ONLY]
 userRouter.post("/:email", UserController.getByEmail);
 
  
