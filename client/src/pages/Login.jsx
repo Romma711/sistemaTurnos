@@ -35,11 +35,11 @@ export function Login({user}) {
       method: "post",
       headers:{"Content-Type": "application/x-www-form-urlencoded",},
       body: new URLSearchParams({email, password})
-    }).then (res => 
-      res.json()
-    ).then(res => {
-      user(res)
-      console.log(res)
+    }).then(res => {
+      if (!res.ok) throw new Error('response is not ok');
+    }).then (res => {
+      sessionStorage.setItem("user" , res)
+      console.log (res)
     }).catch(err => {
       console.error (err)
     })
