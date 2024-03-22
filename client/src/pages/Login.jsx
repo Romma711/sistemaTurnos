@@ -4,7 +4,7 @@ export function Login({user}) {
   const [data, setData] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
+  console.log(password)
   const SignIn = async (evt) => {
     fetch("http://localhost:5000/api/user/register", {
       method: "post",
