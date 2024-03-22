@@ -36,9 +36,9 @@ export function Login({user}) {
       headers:{"Content-Type": "application/x-www-form-urlencoded",},
       body: new URLSearchParams({email, password})
     }).then(res => {
-      if (!res.ok) throw new Error('response is not ok');
+      res.json()
     }).then (res => {
-      sessionStorage.setItem("user" , res)
+      user(res)
       console.log (res)
     }).catch(err => {
       console.error (err)
