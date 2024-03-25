@@ -88,7 +88,7 @@ export class userModel{
             {
                 const passwordVerified = await compare(password, user[0].password); //Verifies password
                 if(passwordVerified == true)
-                { 
+                {
                     return user[0];
                 }
             }

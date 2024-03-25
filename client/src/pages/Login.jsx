@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function Login({user}) {
+export function Login({ user }) {
   const [data, setData] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -31,17 +31,18 @@ export function Login({user}) {
   
  const handleSubmit = (evt) => {
    evt.preventDefault()
-    fetch("http://localhost:5000/api/user/verify", {
+    fetch("http://localhost:5000/api/user/verify",{
       method: "post",
-      headers:{"Content-Type": "application/x-www-form-urlencoded",},
-      body: new URLSearchParams({email, password})
-    }).then(res => {
-      res.json()
-    }).then (res => {
+      headers:{
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({email, password}),
+    })
+    .then((res) => {
+      return res.json()
+    })
+    .then(res =>{
       user(res)
-      console.log (res)
-    }).catch(err => {
-      console.error (err)
     })
 
   }
