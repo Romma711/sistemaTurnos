@@ -36,12 +36,27 @@ export class reservationModel{
     //* Obtener reserva por id *//
     static async getByID ({ id }) {
         try{
-            const [user] = await connection.query(
+            const [reservation] = await connection.query(
                 `SELECT * FROM reservation WHERE id =
                 (?);`
                 [id]
                 )
-                return user[0]
+                return reservation[0]
+        }
+        catch(err){
+            console.error(err)
+        }
+    }
+
+    //* Obtener reservas por id de usuarios *//
+    static async getByID ({ idUser }) {
+        try{
+            const [reservations] = await connection.query(
+                `SELECT * FROM reservation WHERE idUser =
+                (?);`
+                [idUser]
+                )
+                return reservations[0]
         }
         catch(err){
             console.error(err)
