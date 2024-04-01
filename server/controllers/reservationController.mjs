@@ -17,4 +17,11 @@ export class ResevationController {
         const newReservation = await reservationModel.create({ input: req.body })
         res.status(201).json(newReservation)
       }
+
+    static async showByUserId(req, res){
+      const { idUser } = req.params
+      const reservations = await reservationModel.getByUserId({ idUser })
+      if (reservations) return res.json(reservations)
+      res.status(404).json({ message: 'reservation not found' })
+    }
 }
