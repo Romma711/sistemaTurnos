@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export function NavBar({methods, isAdmin}){
-    console.log(isAdmin)
     return(
         <nav className="flex justify-between text-center place-items-center w-full h-[70px] px-10 mx-auto my-[20px] text-xl text-[#e9e6ff]">
             <Link to="/" className="text-2xl font-bold w-[120px]">Nails MPD</Link>

@@ -47,7 +47,6 @@ export class reservationModel{
             console.error(err)
         }
     }
-    
     //* Eliminar reserva *//
     static async remove({ id }) {
         try{

@@ -9,7 +9,7 @@ export function Index(prop) {
       <div className={`${prop.data ==="create" ? '': 'hidden'}`}>
         <Create />
       </div>
-      <div className={`${prop.data ==="list" ? '': 'hidden'}`}>
+      <div className={`${prop.data !=="create" ? '': 'hidden'}`}>
         <AppointmentList/>
       </div>
     </>

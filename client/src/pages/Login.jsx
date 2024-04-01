@@ -50,8 +50,9 @@ export function Login({ user }) {
   return (
     <>
       <h2>Ingresar</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="grid justify-center w-[400px] h-[300px] p-6 rounded-3xl bg-[#210471] text-[#d5d0ff] border-2 border-[#6121ff]" onSubmit={handleSubmit}>
         <input
+          className="w-[250px] h-[35px] p-2 my-[20px] bg-transparent text-[#d5d0ff] border-2 border-[#6121ff] rounded-full"
           type="email"
           name="email"
           value={email}
@@ -59,20 +60,22 @@ export function Login({ user }) {
           placeholder="Ingresar email"
         />
         <input
+          className="w-[250px] h-[35px] p-2 bg-transparent text-[#d5d0ff] border-2 border-[#6121ff] rounded-full"
           type="password"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Ingresar contraseña"
         />
-        <button type="submit">
+        <button className="my-[10px] font-bold bg-transparent text-[#d5d0ff] border-2 border-[#6121ff] rounded-full" type="submit">
           Ingresar
         </button>
       </form>
 
       <h2>Registrarse</h2>
-      <form onSubmit={SignIn}>
+      <form className="grid justify-center w-[400px] h-[500px] p-6 rounded-3xl bg-[#210471] text-[#d5d0ff] border-2 border-[#6121ff]" onSubmit={SignIn}>
         <input
+        className="w-[250px] h-[35px] p-2 my-[10px] bg-transparent text-[#d5d0ff] border-2 border-[#6121ff] rounded-full"
           type="text"
           name="name"
           value={data.name}
@@ -80,6 +83,7 @@ export function Login({ user }) {
           placeholder="Ingresar nombre"
         />
         <input
+        className="w-[250px] h-[35px] p-2 my-[10px] bg-transparent text-[#d5d0ff] border-2 border-[#6121ff] rounded-full"
           type="text"
           name="lastname"
           value={data.lastName}
@@ -87,6 +91,7 @@ export function Login({ user }) {
           placeholder="Ingresar apellido"
         />
         <input
+        className="w-[250px] h-[35px] p-2 my-[10px] bg-transparent text-[#d5d0ff] border-2 border-[#6121ff] rounded-full"
           type="email"
           name="email"
           value={data.email}
@@ -94,6 +99,7 @@ export function Login({ user }) {
           placeholder="Ingresar email"
         />
         <input
+        className="w-[250px] h-[35px] p-2 my-[10px] bg-transparent text-[#d5d0ff] border-2 border-[#6121ff] rounded-full"
           type="text"
           name="phoneNumber"
           value={data.phone}
@@ -101,6 +107,7 @@ export function Login({ user }) {
           placeholder="Ingresar numero de celular"
         />
         <input
+        className="w-[250px] h-[35px] p-2 my-[10px] bg-transparent text-[#d5d0ff] border-2 border-[#6121ff] rounded-full"
           type="password"
           name="password"
           value={data.password}
@@ -108,7 +115,7 @@ export function Login({ user }) {
           placeholder="Ingresar contraseña"
         />
 
-        <button type="submit">Ingresar</button>
+        <button className="my-[30px] w-[250px] h-[50px] font-bold bg-transparent text-[#d5d0ff] border-2 border-[#6121ff] rounded-full" type="submit">Ingresar</button>
       </form>
     </>
   );

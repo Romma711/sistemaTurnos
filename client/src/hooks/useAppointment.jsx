@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Appointment } from "./Appointment";
+import { Appointment } from "../components/Appointment";
 
-export function AppointmentList(){
-  const [data, setData] = useState([])
+export function useAppointment (filter){
+    const [data, setData] = useState([])
   useEffect(() => {
     fetch('http://localhost:5000/api/appointment/')
       .then(async (res) => await res.json())
@@ -10,7 +10,5 @@ export function AppointmentList(){
       .catch((error) => console.error("Error fetching data:", error));
   }, [])
 
-  return(
-    <Appointment appointment={data}/>
-  )
+  return 
 }
