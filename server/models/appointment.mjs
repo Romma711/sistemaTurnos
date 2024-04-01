@@ -30,6 +30,19 @@ export class appointmentModel{
             console.error(err)
         }
     }
+
+    //* Obtener todos los turnos disponibles para reservar *//
+    static async availables () {
+        try{
+            const [appointments] = await connection.query(
+                'SELECT id, title, date, time FROM appointment INNER JOIN reservation ON reservation.idAppointment != appointment.id;'
+              )
+             return appointments;
+        }
+        catch(err){
+            console.error(err)
+        }
+    }
     
     //* Eliminar turno *//
     static async remove({ id }) {
@@ -41,6 +54,8 @@ export class appointmentModel{
             console.error(err)
         }
     }
+
+
     
     
 }

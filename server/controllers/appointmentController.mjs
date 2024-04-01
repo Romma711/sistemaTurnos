@@ -23,4 +23,9 @@ export class AppointmentController {
         const queryResult = await appointmentModel.remove({ id })
         res.status(201).json(queryResult)
     }
+
+    static async availables (req, res){
+      const queryResult = await appointmentModel.availables()
+      res.status(201).json(queryResult)
+    }
 }
