@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Index } from "./pages/Index";
-import { Login } from "./pages/Login";
+import { User } from "./pages/User";
 import { Config } from "./pages/Config";
 import { NavBar } from "./components/NavBar";
 import { useState } from "react";
@@ -22,7 +22,7 @@ function App() {
       <NavBar methods={settingData} isAdmin={user.isAdmin}/>
       <Routes>
         <Route path="/" element={<Index data={data}/>}/>
-        <Route path="/login" element={<Login user={settingUser} />}/>
+        <Route path="/login" element={<User user={settingUser} />}/>
         <Route path="/config" element={<Config />}/>
       </Routes>
     </>
