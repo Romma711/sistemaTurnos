@@ -11,9 +11,9 @@ export function Create() {
     fetch("http://localhost:5000/api/appointment", {
       method: "post",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
-      body: new URLSearchParams(data),
+      body: JSON.stringify(data),
     }).then((res) => console.log(res));
     console.log(data);
     evt.preventDefault();

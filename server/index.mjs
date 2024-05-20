@@ -3,16 +3,14 @@
 
 
 //? Cosas basicas para funcionamiento:
-import express from 'express'
+import express, { json } from 'express'
 import * as path from 'path';
 import cors from 'cors';
-import pkg from 'body-parser';
-const { urlencoded } = pkg;
 
 //? Inicializacion de cosas:
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.use(urlencoded({ extended: true }))
+app.use(json())
 
 //? Configuración de dirname:
 import { fileURLToPath } from 'url';

@@ -5,6 +5,7 @@
 :root{
     width: 100vw;
     height: 100vh;
-    background: rgb(84,15,242);
-    background: linear-gradient(180deg, rgba(84,15,242,1) 32%, rgba(183,171,255,1) 91%);    
+   background-image: url("../assets/fondo-2.jpg");
+   background-repeat: no-repeat;
+   background-position: center;
 }
